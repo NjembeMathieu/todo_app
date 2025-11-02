@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceuil</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/ico.ico' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2100D9 0%, #474747 100%);
+            line-height: 1.6;
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .full-height-container {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            min-height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px 0;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .button {
+            width: 100%;
+            height: 70px;
+            display: block;
+            padding: 18px 20px;
+            background: #000000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            margin-top: 20px;
+            text-align: left;
+            text-decoration:none;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #000000 60%, #E80000 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+        .auth-links {
+        position: center;
+        display:block;
+        margin-bottom:20px;
+        top: 20px;
+        right: 50%;
+        display: flex;
+        gap: 10px;
+    }
+
+    .auth-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+    }
+
+    .auth-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .auth-button:active {
+        transform: translateY(0);
+    }
+
+    <style>
+.auth-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+.auth-button:hover {
+    background: #5a6fd8;
+}
+
+form[action*="logout"] {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 2px solid #e9ecef;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="auth-links">
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="auth-button">Se déconnecter</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="auth-button">Se connecter</a>
+            <a href="{% url 'signup' %}" class="auth-button">Créer un compte</a>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="full-height-container">
+            <div class="content">
+                <h1>Bienvenue, a quelle application voulez vous acceder ?</h1>
+                <a href="{% url 'task_list' %}" class="button"> 📝 TODO APP</a>
+            </div>
+            <footer>
+                <p>&copy; 2025 TODO App - Web Development Exercise</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
