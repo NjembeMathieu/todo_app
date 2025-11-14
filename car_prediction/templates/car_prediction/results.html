@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            margin: 20px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .prediction-result {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .prediction-result .price {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .prediction-result .label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .input-data {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .input-data h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .data-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .data-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .data-list li:last-child {
+            border-bottom: none;
+        }
+
+        .data-list .label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .data-list .value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .prediction-id {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid #b3d9ff;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Prediction Results</h2>
+            <p>Your car affordability analysis</p>
+        </div>
+
+        <div class="prediction-result">
+            <div class="label">Predicted Car Price</div>
+            <div class="price">${{ prediction|floatformat:2 }}</div>
+        </div>
+
+        <div class="input-data">
+            <h3>Input Data</h3>
+            <ul class="data-list">
+                <li>
+                    <span class="label">Gender:</span>
+                    <span class="value">{% if input_data.Gender == 1 %}Male{% else %}Female{% endif %}</span>
+                </li>
+                <li>
+                    <span class="label">Age:</span>
+                    <span class="value">{{ input_data.Age }}</span>
+                </li>
+                <li>
+                    <span class="label">Annual Salary:</span>
+                    <span class="value">${{ annual_salary|floatformat:2 }}</span>
+                </li>
+                <li>
+                    <span class="label">Credit Card Debt:</span>
+                    <span class="value">${{ credit_card_debt|floatformat:2 }}</span>
+                </li>
+                <li>
+                    <span class="label">Net Worth:</span>
+                    <span class="value">${{ net_worth|floatformat:2 }}</span>
+                </li>
+            </ul>
+        </div>
+
+        {% if prediction_id %}
+        <div class="prediction-id">
+            <strong>Prediction ID:</strong> {{ prediction_id }}
+        </div>
+        {% endif %}
+
+        <a href="{% url 'car_prediction:home' %}" class="btn">Make Another Prediction</a>
+
+        <div class="back-link">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_browser_reload',
     'todo_app',
+    'car_prediction',
+
 ]
 
 MIDDLEWARE = [
